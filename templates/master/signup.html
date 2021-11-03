@@ -1,0 +1,99 @@
+{% extends 'master/home.html' %}
+
+{% block 'title' %} Signup Page  {% endblock %}
+
+{% block 'style' %}
+  body{
+     background: linear-gradient(#f1f1f1, #48b080);
+  }
+  #fixed-message {
+      position: fixed;
+      top: 10%;
+      left: 75%;
+  }
+{% endblock %}
+
+{% block 'body' %}
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
+</div>
+<div class="register-box">
+  <div class="register-logo">
+    <h6 style="font-family: harrington; text-shadow: 1px 3px 2px #48b080; font-size:3.2rem; cursor:default;"><b>- HRMS -</b></h6>
+  </div>
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg" style="color:#000;">Register a new membership</p>
+      <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" value="{{name}}" name="fullname" placeholder="Full name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" value="{{address}}"  name="address" placeholder="Address" >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-home"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" value="{{email}}"  name="email" placeholder="Email" >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" value="{{number}}"  name="contact" placeholder="Number" >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-phone"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password2" placeholder="Retype password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <select class="form-select" name="selectOption">
+            <option selected disabled>Choose account type</option>
+            <option value="user">User</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
+        <div class="col-16">
+          <button type="submit" class="btn btn-success btn-block">Register</button>
+        </div>
+      </form>
+      <p class="mb-0 text-center">
+        <span style="color: #232323">-or-</span><br>
+        <a href="{% url 'login' %}" style="text-decoration:none;" class="text-center">I already have a membership</a>
+      </p>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+
+{% endblock %}
+
+

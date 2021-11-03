@@ -1,0 +1,24 @@
+{% extends 'user/dashboard.html' %}
+{% block 'title' %} User - Skill {% endblock %}
+{% block 'title1' %} Skill {% endblock %}
+{% block 'title2' %} Skill {% endblock %}
+
+{% block 'content' %}
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title" style="font-weight:bold;">Provide Your Skill Details.</h3>
+  </div>
+  <form action="{% url 'skill' %}" method="post">
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-group">
+        <label for="skill">Your Skills</label>
+        <textarea name="textarea" id="skill" class="form-control" placeholder="Enter your skill" style="height: 100px"></textarea>
+      </div>
+      <input type="hidden" name="skl" value="{{request.user.id}}">
+      <button type="submit" class="btn btn-primary" style="float: right; margin: 10px;">Submit</button>
+      <a class="btn btn-warning" href="{% url 'experience'%}" style="float: right; margin: 10px">Skip</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

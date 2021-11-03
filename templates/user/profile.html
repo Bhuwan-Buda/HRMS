@@ -1,0 +1,87 @@
+{% extends 'user/dashboard.html' %}
+{% load static %}
+{% block 'title' %} User - Profile {% endblock %}
+{% block 'title1' %} Profile {% endblock %}
+{% block 'title2' %} Profile {% endblock %}
+
+{% block 'content' %}
+<div id="fixed-message">
+    {% include 'component/messages.html' %}
+</div>
+<div class="card card-primary">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            {% if edu.img %}
+                <img class="profile-user-img img-fluid img-circle"
+                src="{{MEDIA_URL}}{{edu.img.url}}"
+                alt="User profile picture">
+            {% else %}
+                <img class="profile-user-img img-fluid img-circle"
+                src="{% static 'img/userprofile.jpg' %}"
+                alt="User profile picture">
+            {% endif %}
+        </div>
+        <h3 class="profile-username text-center">{{request.user.fullname}}</h3>
+    </div>
+</div>
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">About Me</h3>
+    </div>
+<!-- /.card-header -->
+    <div class="card-body">
+        <strong><i class="fas fa-home"></i> Address</strong>
+        <p class="text-muted">{{request.user.address}}, {{edu.country}}</p>
+        <hr/>
+        <strong><i class="fas fa-venus-mars"></i> Gender</strong>
+        <p class="text-muted">
+            {% if edu.gender == 'M' %}
+                Male
+            {% else %}
+                Female
+            {% endif %}
+        </p>
+        <hr>
+        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+         <p class="text-muted">
+             {% if edu.level %}
+                Completed
+                    {% if edu.level == 'S' %}
+                        School
+                    {% elif edu.level == 'C' %}
+                        College
+                    {% else %}
+                        University
+                    {% endif %}
+                in {{edu.majorCourse}} at {{edu.institutionName}}.
+             {% else %}
+                Add your education
+             {% endif %}
+         </p>
+        <a href="{% url 'education' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
+        <hr>
+        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+        <p class="text-muted">
+            {% if skl.skill %}
+                {{skl.skill}}
+            {% else %}
+                Add your skill
+            {% endif %}
+        </p>
+        <a href="{% url 'skill' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
+        <hr>
+        <strong><i class="far fa-file-alt mr-1"></i> Experience</strong>
+        <p class="text-muted">
+            {% if exp.experience %}
+                {{exp.experience}}
+            {% else %}
+                Add your experience
+            {% endif %}
+        </p>
+        <a href="{% url 'experience' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'user/dashboard.html' %}
+{% block 'title' %} User - Experience {% endblock %}
+{% block 'title1' %} Experience {% endblock %}
+{% block 'title2' %} Experience {% endblock %}
+{% block 'content' %}
+<div class="card" >
+  <div class="card-header">
+    <h3 class="card-title" style="font-weight:bold;">Provide Your Experience Details.</h3>
+  </div>
+  <form action="{% url 'experience' %}" method="post">
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-group">
+        <label for="skill">Your Experience</label>
+        <textarea name="exptextarea" id="skill" class="form-control" placeholder="Enter your experience" style="height: 100px"></textarea>
+      </div>
+        <input type="hidden" name="exp" value="{{request.user.id}}">
+    <button type="submit" class="btn btn-primary" style="float: right; margin: 10px;">Submit</button>
+      <a class="btn btn-warning" href="{% url 'profile'%}" style="float: right; margin: 10px">Skip</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
