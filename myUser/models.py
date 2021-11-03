@@ -70,6 +70,7 @@ class Education(models.Model):
     majorCourse = models.CharField(max_length=40)
     level = models.CharField(max_length=1, choices=LEVELS, default=None)
     country = models.CharField(max_length=100, default=None)
+    file = models.FileField(default=None, upload_to='documents/')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

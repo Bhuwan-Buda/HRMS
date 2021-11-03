@@ -81,6 +81,9 @@
             {% endif %}
         </p>
         <a href="{% url 'experience' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
+        <hr>
+        <strong><i class="far fa-file-alt mr-1"></i> Your Document:- </strong>
+        <a href="{{MEDIA_URL}}{{edu.file.url}}" style="text-decoration:none;">Download Document</a>
     </div>
 </div>
 

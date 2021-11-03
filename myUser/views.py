@@ -128,6 +128,7 @@ def education(request):
         image = request.FILES['image']
         gender = request.POST['radiobutton']
         country = request.POST['country']
+        file = request.FILES['file']
         uid = request.POST['edu']
         isEducation = Education.objects.filter(user=request.user).exists()
         if isEducation:
@@ -138,9 +139,10 @@ def education(request):
             e.img = image
             e.gender = gender
             e.country = country
+            e.file = file
             e.save()
         else:
-            e = Education(institutionName=inst, majorCourse=course, gender=gender, level=level, img=image, country=country, user_id=uid)
+            e = Education(institutionName=inst, majorCourse=course, gender=gender, level=level, img=image, country=country,file=file, user_id=uid)
             e.save()
         return render(request, 'user/skill.html')
     return render(request, 'user/education.html')
@@ -205,5 +207,4 @@ def viewuser(request, id):
         'skl': s,
         'exp': ex
     }
-
     return render(request, 'employee/view.html', context)
