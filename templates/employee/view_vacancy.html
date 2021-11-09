@@ -1,23 +1,38 @@
 {% extends 'employee/dashboard.html' %}
 {% load static %}
 {% block 'title' %} Employee - View Vacancy {% endblock %}
+{% block 'style' %}
+    #image{
+        width: 240px;
+        height: 240px;
+        margin:auto;
+        transition: all ease-in-out 1s;
+        animation: blink 1.5s infinite;
+    }
+    @keyframes blink{
+        0%{transform: scale(1.02)}
+        50%{transform: scale(1)}
+        100%{transform: scale(1.02)}
+}
+{% endblock %}
 {% block 'emptitle1' %} View Vacancy {% endblock %}
 {% block 'emptitle2' %} View Vacancy {% endblock %}
 
 {% block 'empcontent' %}
 <div class="container">
     <div class="row">
-      <div class="card">
+      <div class="card flex-row-reverse">
+          <img src="{% static 'img/job2.jpg' %}"  alt="afdaf" id="image">
           <div class="card-body">
             <h5 class="card-title" style="font-size: 1.6rem; font-weight: bold; color: red;">{{vacancy.title}}</h5>
-            <p class="card-text" style="font-size:1rem; font-style: oblique; color: #444">{{vacancy.description}}</p>
+            <p class="card-text" style="font-size:1rem; font-style: oblique; color: skyblue">{{vacancy.description}}</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Qualifications: </strong>{{vacancy.qualification}}</li>
+                <li class="list-group-item"><strong>Experience: </strong>{{vacancy.experience}}</li>
+                <li class="list-group-item"><strong>Salary: </strong>{{vacancy.salary}}</li>
+                <li class="list-group-item"><strong>Apply upto: </strong>{{vacancy.final_date}}</li>
+              </ul>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Qualifications: </strong>{{vacancy.qualification}}</li>
-            <li class="list-group-item"><strong>Experience: </strong>{{vacancy.experience}}</li>
-            <li class="list-group-item"><strong>Salary: </strong>{{vacancy.salary}}</li>
-            <li class="list-group-item"><strong>Apply upto: </strong>{{vacancy.final_date}}</li>
-          </ul>
       </div>
     </div>
 </div>

@@ -27,6 +27,7 @@ urlpatterns = [
     path('logout/', signout, name='logout'),
     path('delete/', delete, name='delete'),
     path('dashboard/', include('myUser.urls')),
+    path('vacancy/', include('vacancy.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

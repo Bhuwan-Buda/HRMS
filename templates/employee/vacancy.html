@@ -1,6 +1,12 @@
 {% extends 'employee/dashboard.html' %}
 {% load static %}
 {% block 'title' %} Employee - Vacancy {% endblock %}
+{% block 'style' %}
+    #image:hover {
+        transition: all 0.5s;
+        transform: scale(1.01);
+}
+{% endblock %}
 {% block 'emptitle1' %} Vacancy {% endblock %}
 {% block 'emptitle2' %} Vacancy {% endblock %}
 
@@ -13,10 +19,10 @@
   <div class="row">
       {% for v in vacancy %}
       <div class="card" style="width: 21rem; margin: 10px;">
-          <img src="{% static 'img/job2.jpg' %}" class="card-img-top" alt="job vacancy">
+          <img src="{% static 'img/job2.jpg' %}" class="card-img-top" alt="job vacancy" id="image">
           <div class="card-body">
             <h5 class="card-title" style="font-size: 1.6rem; font-weight: bold; color: red;">{{v.title}}</h5>
-            <p class="card-text" style="font-size:1rem; font-style: oblique; color: #444">{{v.description|truncatewords:10}}</p>
+            <p class="card-text" style="font-size:1rem; font-style: oblique; color: skyblue">{{v.description|truncatewords:6}}</p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Qualifications: </strong>{{v.qualification|truncatewords:3}}</li>

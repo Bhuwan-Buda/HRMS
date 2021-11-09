@@ -10,6 +10,5 @@ urlpatterns = [
     path('user/experience/', views.experience, name='experience'),
     path('employee/userlist/', views.userlist, name='userlist'),
     path('employee/viewuser/<int:id>', views.viewuser, name='viewuser'),
-    path('employee/', include('vacancy.urls')),
 ]
 

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from vacancy.models import Vacancy
-from django.contrib import messages
 
 # Create your views here.
 
