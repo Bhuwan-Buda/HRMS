@@ -3,6 +3,8 @@ from myUser.models import User, Education, Skill, Experience
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from vacancy.models import Vacancy
+
 # Create your views here.
 
 
@@ -94,7 +96,10 @@ def userDashboard(request):
     context = {}
     try:
         context.update({
-            'edu': Education.objects.get(user=request.user)
+            'edu': Education.objects.get(user=request.user),
+            'user_count': User.objects.filter(isUser=True).count(),
+            'employee_count': User.objects.filter(isEmployee=True).count(),
+            'vacancy_count': Vacancy.objects.count()
         })
     except Exception as e:
         return render(request, 'user/dashboard.html', context)
@@ -103,7 +108,16 @@ def userDashboard(request):
 
 @login_required(login_url='login')
 def employeeDashboard(request):
-    return render(request, 'employee/dashboard.html')
+    context = {}
+    try:
+        context.update({
+            'user_count': User.objects.filter(isUser=True).count(),
+            'employee_count': User.objects.filter(isEmployee=True).count(),
+            'vacancy_count': Vacancy.objects.count()
+        })
+    except Exception as e:
+        return render(request, 'employee/dashboard.html', context)
+    return render(request, 'employee/dashboard.html', context)
 
 
 def profile(request):

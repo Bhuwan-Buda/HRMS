@@ -14,7 +14,6 @@ GENDER_CHOICES = (
     ('F', 'Female')
 )
 
-
 class UserManager(BaseUserManager):
     def create_user(self, email, fullname, address, password=None):
         user = self.model(

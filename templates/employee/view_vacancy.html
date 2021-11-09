@@ -1,0 +1,29 @@
+{% extends 'employee/dashboard.html' %}
+{% load static %}
+{% block 'title' %} Employee - View Vacancy {% endblock %}
+{% block 'emptitle1' %} View Vacancy {% endblock %}
+{% block 'emptitle2' %} View Vacancy {% endblock %}
+
+{% block 'empcontent' %}
+<div class="container">
+    <div class="row">
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 1.6rem; font-weight: bold; color: red;">{{vacancy.title}}</h5>
+            <p class="card-text" style="font-size:1rem; font-style: oblique; color: #444">{{vacancy.description}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Qualifications: </strong>{{vacancy.qualification}}</li>
+            <li class="list-group-item"><strong>Experience: </strong>{{vacancy.experience}}</li>
+            <li class="list-group-item"><strong>Salary: </strong>{{vacancy.salary}}</li>
+            <li class="list-group-item"><strong>Apply upto: </strong>{{vacancy.final_date}}</li>
+          </ul>
+      </div>
+    </div>
+</div>
+<div style="text-align: center; padding: 0 0 12px 0;">
+    <a href="{% url 'vacancy' %}" style="text-decoration: none; font-size: 1.2rem;">
+        <i class="fas fa-arrow-left"></i>
+        Back to Vacancy</a>
+</div>
+{% endblock %}

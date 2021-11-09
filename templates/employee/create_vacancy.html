@@ -1,0 +1,51 @@
+{% extends 'employee/dashboard.html' %}
+
+{% block 'title' %} Employee - Create Vacancy {% endblock %}
+{% block 'emptitle1' %} Create Vacancy {% endblock %}
+{% block 'emptitle2' %} Create Vacancy {% endblock %}
+
+{% block 'empcontent' %}
+<div class="card card-primary">
+  <div class="card-header">
+    <h3 class="card-title">Create Your Vacancy</h3>
+  </div>
+  <form action="{% url 'create-vacancy' %}" method="post">
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" style="height: 100px" id="description" placeholder="Enter vacancy description" name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <textarea class="form-control" style="height: 100px" id="qualification" name="qualification" placeholder="Enter qualification"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="experience">Experience</label>
+        <textarea class="form-control" style="height: 100px" id="experience" name="experience" placeholder="Enter experience"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="text" class="form-control" id="salary" name="salary" placeholder="Enter salary">
+      </div>
+      <div class="form-group">
+        <label for="date">Final date to apply</label>
+        <input type="date" class="form-control" id="date" name="date" placeholder="Enter date">
+      </div>
+      <input type="hidden" name="vac" value="{{request.user.id}}">
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save Vacancy</button>
+    </div>
+    </div>
+  </form>
+</div>
+<div style="text-align: center; padding: 0 0 12px 0;">
+    <a href="{% url 'vacancy' %}" style="text-decoration: none; font-size: 1.2rem;">
+        <i class="fas fa-arrow-left"></i>
+        Back to Vacancy</a>
+</div>
+{% endblock %}
