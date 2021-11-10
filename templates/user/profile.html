@@ -59,7 +59,6 @@
                 Add your education
              {% endif %}
          </p>
-        <a href="{% url 'education' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
         <hr>
         <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
@@ -70,7 +69,6 @@
                 Add your skill
             {% endif %}
         </p>
-        <a href="{% url 'skill' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
         <hr>
         <strong><i class="far fa-file-alt mr-1"></i> Experience</strong>
         <p class="text-muted">
@@ -80,10 +78,11 @@
                 Add your experience
             {% endif %}
         </p>
-        <a href="{% url 'experience' %}"><i class="fas fa-edit" style="font-size: 1.2rem; color: black;" title="Edit"></i></a>
         <hr>
         <strong><i class="far fa-file-alt mr-1"></i> Your Document:- </strong>
         <a href="{{MEDIA_URL}}{{edu.file.url}}" style="text-decoration:none;">Download Document</a>
+        <hr>
+        <a href="{% url 'education' %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
     </div>
 </div>
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from vacancy.models import Vacancy
+from django.contrib import messages
 
 # Create your views here.
 
@@ -7,6 +8,7 @@ from vacancy.models import Vacancy
 def deletevacancy(request, id):
     vac = Vacancy.objects.get(id=id)
     vac.delete()
+    messages.add_message(request, messages.ERROR, f"{vac.title} is deleted")
     return redirect('vacancy')
 
 
@@ -19,6 +21,11 @@ def viewvacancy(request, id):
 
 
 def editvacancy(request, id):
+    vacancy = get_object_or_404(Vacancy, id=id)
+    context = {
+        'vacancy': vacancy
+    }
+
     if request.method == 'POST':
         title = request.POST['t']
         des = request.POST['d']
@@ -42,7 +49,7 @@ def editvacancy(request, id):
             v.save()
         return redirect('vacancy')
 
-    return render(request, 'employee/edit_vacancy.html')
+    return render(request, 'employee/edit_vacancy.html', context)
 
 
 def vacancy(request):

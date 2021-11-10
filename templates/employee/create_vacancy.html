@@ -14,31 +14,31 @@
     <div class="card-body">
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" style="height: 100px" id="description" placeholder="Enter vacancy description" name="description"></textarea>
+        <textarea class="form-control" style="height: 100px" id="description" required  placeholder="Enter vacancy description" name="description"></textarea>
       </div>
       <div class="form-group">
         <label for="qualification">Qualification</label>
-        <textarea class="form-control" style="height: 100px" id="qualification" name="qualification" placeholder="Enter qualification"></textarea>
+        <textarea class="form-control" style="height: 100px" id="qualification" required name="qualification" placeholder="Enter qualification"></textarea>
       </div>
       <div class="form-group">
         <label for="experience">Experience</label>
-        <textarea class="form-control" style="height: 100px" id="experience" name="experience" placeholder="Enter experience"></textarea>
+        <textarea class="form-control" style="height: 100px" id="experience" required name="experience" placeholder="Enter experience"></textarea>
       </div>
       <div class="form-group">
         <label for="salary">Salary</label>
-        <input type="text" class="form-control" id="salary" name="salary" placeholder="Enter salary">
+        <input type="text" class="form-control" id="salary" required  name="salary" placeholder="Enter salary">
       </div>
       <div class="form-group">
         <label for="date">Final date to apply</label>
-        <input type="date" class="form-control" id="date" name="date" placeholder="Enter date">
+        <input type="date" class="form-control" id="date" name="date" placeholder="Enter date" required>
       </div>
       <input type="hidden" name="vac" value="{{request.user.id}}">
     <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Save Vacancy</button>
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
     </div>
     </div>
   </form>

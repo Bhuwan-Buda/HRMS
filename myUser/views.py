@@ -94,15 +94,25 @@ def delete(request):
 @login_required(login_url='login')
 def userDashboard(request):
     context = {}
-    try:
+    user_count = User.objects.filter(isUser=True).count()
+    employee_count = User.objects.filter(isEmployee=True).count()
+    vacancy_count = Vacancy.objects.count()
+    isEducation = Education.objects.filter(user=request.user).exists()
+    if isEducation:
+        edu = Education.objects.get(user=request.user)
         context.update({
-            'edu': Education.objects.get(user=request.user),
-            'user_count': User.objects.filter(isUser=True).count(),
-            'employee_count': User.objects.filter(isEmployee=True).count(),
-            'vacancy_count': Vacancy.objects.count()
+            'user_count': user_count,
+            'employee_count': employee_count,
+            'vacancy_count': vacancy_count,
+            'edu': edu
         })
-    except Exception as e:
         return render(request, 'user/dashboard.html', context)
+    else:
+        context.update({
+            'user_count': user_count,
+            'employee_count': employee_count,
+            'vacancy_count': vacancy_count,
+        })
     return render(request, 'user/dashboard.html', context)
 
 
@@ -159,17 +169,19 @@ def education(request):
             e = Education(institutionName=inst, majorCourse=course, gender=gender, level=level, img=image, country=country,file=file, user_id=uid)
             e.save()
         return render(request, 'user/skill.html')
-    return render(request, 'user/education.html')
+
+    edu = get_object_or_404(Education, user=request.user)
+    context = {
+        'edu': edu
+    }
+    return render(request, 'user/education.html', context)
 
 
 def skill(request):
-    context = {}
+
     if request.method == 'POST':
         skl = request.POST['textarea']
         uid = request.POST['skl']
-        context.update({
-            'skill': skl
-        })
         isSkill = Skill.objects.filter(user=request.user).exists()
         if isSkill:
             s = Skill.objects.get(user=request.user)
@@ -179,6 +191,10 @@ def skill(request):
             s = Skill(skill=skl, user_id=uid)
             s.save()
         return render(request, 'user/experience.html')
+    skl = get_object_or_404(Skill, user=request.user)
+    context = {
+        'skl': skl
+    }
     return render(request, 'user/skill.html', context)
 
 
@@ -195,7 +211,12 @@ def experience(request):
             e = Experience(experience=exp, user_id=uid)
             e.save()
         return redirect('profile')
-    return render(request, 'user/experience.html')
+
+    exp = get_object_or_404(Experience, user=request.user)
+    context = {
+        'exp': exp
+    }
+    return render(request, 'user/experience.html', context)
 
 
 def userlist(request):

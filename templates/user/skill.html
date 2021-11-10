@@ -13,7 +13,7 @@
     <div class="card-body">
       <div class="form-group">
         <label for="skill">Your Skills</label>
-        <textarea name="textarea" id="skill" class="form-control" placeholder="Enter your skill" style="height: 100px"></textarea>
+        <textarea name="textarea" id="skill" class="form-control" placeholder="Enter your skill" style="height: 100px">{{skl.skill}}</textarea>
       </div>
       <input type="hidden" name="skl" value="{{request.user.id}}">
       <button type="submit" class="btn btn-primary" style="float: right; margin: 10px;">Submit</button>
