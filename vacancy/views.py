@@ -53,7 +53,7 @@ def editvacancy(request, id):
 
 
 def vacancy(request):
-    vac = Vacancy.objects.all()[::-1]
+    vac = Vacancy.objects.filter(user=request.user)[::-1]
     context = {
         'vacancy': vac
     }
@@ -74,3 +74,19 @@ def createvacancy(request):
         return redirect('vacancy')
 
     return render(request, 'employee/create_vacancy.html')
+
+
+def userVacancy(request):
+    vac = Vacancy.objects.all()[::-1]
+    context = {
+        'vacancy': vac
+    }
+    return render(request, 'user/vacancy.html', context)
+
+
+def viewuservacancy(request, id):
+    vac = get_object_or_404(Vacancy, id=id)
+    context = {
+        'vacancy': vac
+    }
+    return render(request, 'user/view-vacancy.html', context)

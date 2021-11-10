@@ -1,0 +1,32 @@
+{% extends 'user/dashboard.html' %}
+{% load static %}
+{% block 'title' %} User - Vacancy {% endblock %}
+{% block 'title1' %} Vacancy {% endblock %}
+{% block 'title2' %} Vacancy {% endblock %}
+
+{% block 'content' %}
+<div class="container">
+  <div class="row">
+      {% for v in vacancy %}
+      <div class="card" style="width: 21rem; margin: 10px;">
+          <img src="{% static 'img/job.jpg' %}" class="card-img-top" alt="job vacancy" id="image">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 1.6rem; font-weight: bold; color: red;">{{v.title}}</h5>
+            <p class="card-text" style="font-size:1rem; font-style: oblique; color: skyblue">{{v.description|truncatewords:6}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Qualifications: </strong>{{v.qualification|truncatewords:3}}</li>
+            <li class="list-group-item"><strong>Experience: </strong>{{v.experience|truncatewords:3}}</li>
+            <li class="list-group-item"><strong>Salary: </strong>{{v.salary}}</li>
+            <li class="list-group-item"><strong>Apply upto: </strong>{{v.final_date}}</li>
+            <li class="list-group-item"><strong>Posted by: </strong>{{v.user}}</li>
+          </ul>
+
+          <div class="card-body" style="margin:auto;">
+            <a href="{% url 'view-user-vacancy' v.id %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

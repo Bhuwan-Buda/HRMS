@@ -2,7 +2,10 @@
 {% load static %}
 {% block 'title' %} Dashboard - Employee {% endblock %}
 {% block 'style' %}
-
+#name:hover {
+    transition: all ease 1s;
+    color: #48b080;
+}
 {% endblock %}
 {% block 'body' %}
 <div class="wrapper">
@@ -39,11 +42,8 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{% static 'img/userprofile.jpg' %}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block" style="text-decoration:none;">{{request.user.fullname}}</a>
+        <div class="info" style="margin: auto;">
+          <a href="{% url 'profile' %}" id="name" style="text-decoration:none; font-size: 2rem; font-family: Mangal">{{request.user.fullname}}</a>
         </div>
       </div>
 

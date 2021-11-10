@@ -168,7 +168,13 @@ def education(request):
         else:
             e = Education(institutionName=inst, majorCourse=course, gender=gender, level=level, img=image, country=country,file=file, user_id=uid)
             e.save()
-        return render(request, 'user/skill.html')
+
+        skl = get_object_or_404(Skill, user=request.user)
+        context = {
+            'skl': skl
+        }
+
+        return render(request, 'user/skill.html', context)
 
     edu = get_object_or_404(Education, user=request.user)
     context = {
@@ -178,7 +184,6 @@ def education(request):
 
 
 def skill(request):
-
     if request.method == 'POST':
         skl = request.POST['textarea']
         uid = request.POST['skl']
@@ -190,12 +195,14 @@ def skill(request):
         else:
             s = Skill(skill=skl, user_id=uid)
             s.save()
-        return render(request, 'user/experience.html')
-    skl = get_object_or_404(Skill, user=request.user)
-    context = {
-        'skl': skl
-    }
-    return render(request, 'user/skill.html', context)
+
+        exp = get_object_or_404(Experience, user=request.user)
+        context = {
+            'exp': exp
+        }
+        return render(request, 'user/experience.html', context)
+
+    return render(request, 'user/skill.html')
 
 
 def experience(request):
@@ -212,11 +219,7 @@ def experience(request):
             e.save()
         return redirect('profile')
 
-    exp = get_object_or_404(Experience, user=request.user)
-    context = {
-        'exp': exp
-    }
-    return render(request, 'user/experience.html', context)
+    return render(request, 'user/experience.html')
 
 
 def userlist(request):

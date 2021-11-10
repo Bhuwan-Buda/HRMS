@@ -27,7 +27,7 @@
       <div class="form-group">
         <label for="education">Education Level</label>
         <select class="form-control" name="selectLevel" id="education" required>
-            <option selected disabled>Choose your education level</option>
+            <option value="" selected disabled>Choose your education level</option>
             <option value="S">School</option>
             <option value="C">College</option>
             <option value="U">University</option>
@@ -53,7 +53,6 @@
     </div>
     <input type="hidden" name="edu" value="{{request.user.id}}">
     <button type="submit" class="btn btn-primary" style="float: right; margin: 10px;">Submit</button>
-    <a class="btn btn-warning" href="{% url 'skill'%}" style="float: right; margin: 10px">Skip</a>
   </form>
 </div>
 <div id="fixed-message">
