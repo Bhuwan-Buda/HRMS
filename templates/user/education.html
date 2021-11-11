@@ -28,42 +28,27 @@
         <label for="education">Education Level</label>
         <select class="form-control" name="selectLevel" id="education" required>
             <option value="" selected disabled hidden>Choose your education level</option>
-          {% if edu.level == "S" %}
-            <option value="S" selected>School</option>
-            <option value="C" >College</option>
-            <option value="U" >University</option>
-          {% elif edu.level == "C" %}
-            <option value="S">School</option>
-            <option value="C" selected>College</option>
-            <option value="U">University</option>
-          {% else %}
             <option value="S">School</option>
             <option value="C">College</option>
-            <option value="U" selected>University</option>
-          {% endif %}
+            <option value="U">University</option>
         </select>
       </div>
       <div class="form-group">
         <label for="image">Image</label>
         <div class="input-group">
-          <input type="file" name="image" id="image" value="{{edu.img}}" required>
+          <input type="file" name="image" id="image"  required>
         </div>
       </div>
       <div class="form-group">
         <label for="file">Document <span style="color: red; font-size: 0.8rem; font-style: oblique;">*(Document should be in pdf or docs.)</span></label>
         <div class="input-group">
-          <input type="file" name="file" id="file" accept=".pdf, .docs, .docx" value="{{edu.file}}"  required>
+          <input type="file" name="file" id="file" accept=".pdf, .docs, .docx" required>
         </div>
       </div>
       <div class="form-group">
         <label>Gender: </label>
-        {% if edu.gender == "M" %}
-          <input type="radio" name="radiobutton" value="M" checked="checked" id="1" required> <b><label for="1">Male</label></b>
+          <input type="radio" name="radiobutton" value="M" id="1" required> <b><label for="1">Male</label></b>
           <input type="radio" name="radiobutton"  value="F" id="2" required> <b><label for="2">Female</label></b>
-        {% else %}
-          <input type="radio" name="radiobutton" value="M" id="3" required>  <b><label for="3">Male</label></b>
-          <input type="radio" name="radiobutton" value="F" checked="checked" id="4" required> <b><label for="4">Female</label></b>
-        {% endif %}
       </div>
     </div>
     <input type="hidden" name="edu" value="{{request.user.id}}">

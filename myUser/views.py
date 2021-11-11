@@ -169,12 +169,15 @@ def education(request):
             e = Education(institutionName=inst, majorCourse=course, gender=gender, level=level, img=image, country=country,file=file, user_id=uid)
             e.save()
 
-        skl = get_object_or_404(Skill, user=request.user)
-        context = {
-            'skl': skl
-        }
-
-        return render(request, 'user/skill.html', context)
+        isSkill = Skill.objects.filter(user=request.user).exists()
+        if isSkill:
+            skl = get_object_or_404(Skill, user=request.user)
+            context = {
+                'skl': skl
+            }
+            return render(request, 'user/skill.html', context)
+        else:
+            return render(request, 'user/skill.html')
 
     edu = get_object_or_404(Education, user=request.user)
     context = {
@@ -196,11 +199,15 @@ def skill(request):
             s = Skill(skill=skl, user_id=uid)
             s.save()
 
-        exp = get_object_or_404(Experience, user=request.user)
-        context = {
-            'exp': exp
-        }
-        return render(request, 'user/experience.html', context)
+        isExp = Experience.objects.filter(user=request.user).exists()
+        if isExp:
+            exp = get_object_or_404(Experience, user=request.user)
+            context = {
+                'exp': exp
+            }
+            return render(request, 'user/experience.html', context)
+        else:
+            return render(request, 'user/experience.html')
 
     return render(request, 'user/skill.html')
 
