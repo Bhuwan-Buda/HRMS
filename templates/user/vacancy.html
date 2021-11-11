@@ -3,8 +3,22 @@
 {% block 'title' %} User - Vacancy {% endblock %}
 {% block 'title1' %} Vacancy {% endblock %}
 {% block 'title2' %} Vacancy {% endblock %}
-
+{% block 'style' %}
+    #image:hover {
+        transition: all 0.5s;
+        transform: scale(1.01);
+    }
+    #fixed-message{
+        position: fixed;
+        top: 8%;
+        left: 77%;
+        z-index: 10000000;
+    }
+{% endblock %}
 {% block 'content' %}
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
+</div>
 <div class="container">
   <div class="row">
       {% for v in vacancy %}

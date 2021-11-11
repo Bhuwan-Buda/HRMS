@@ -22,7 +22,7 @@
     <div class="row">
       <div class="card flex-row-reverse">
           <img src="{% static 'img/job.jpg' %}"  alt="afdaf" id="image">
-          <div class="card-body">
+          <div class="card-body" style="margin:auto;">
             <h5 class="card-title" style="font-size: 1.6rem; font-weight: bold; color: red;">{{vacancy.title}}</h5>
             <p class="card-text" style="font-size:1rem; font-style: oblique; color: skyblue">{{vacancy.description}}</p>
               <ul class="list-group list-group-flush">
@@ -32,6 +32,8 @@
                 <li class="list-group-item"><strong>Apply upto: </strong>{{vacancy.final_date}}</li>
                 <li class="list-group-item"><strong>Posted by: </strong>{{vacancy.user}}</li>
               </ul>
+              <br>
+            <a href="#" class="btn btn-primary btn-md" >Apply Now</a>
           </div>
       </div>
     </div>
@@ -41,4 +43,7 @@
         <i class="fas fa-arrow-left"></i>
         Back to Vacancy</a>
 </div>
+{% endblock %}
+{% block 'script' %}
+
 {% endblock %}

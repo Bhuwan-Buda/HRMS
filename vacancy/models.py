@@ -20,6 +20,8 @@ class Vacancy(models.Model):
 
 
 class Enroll(models.Model):
+    isApplied = models.BooleanField(default=False)
+    isHired = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
 
@@ -28,5 +30,4 @@ class Enroll(models.Model):
 
     class Meta:
         db_table = 'Enroll'
-
 
