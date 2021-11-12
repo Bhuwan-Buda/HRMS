@@ -33,7 +33,7 @@
                 <li class="list-group-item"><strong>Posted by: </strong>{{vacancy.user}}</li>
               </ul>
               <br>
-            <a href="#" class="btn btn-primary btn-md" >Apply Now</a>
+            <a href="{% url 'apply' vacancy.id %}" class="btn btn-primary btn-md">Apply Now</a>
           </div>
       </div>
     </div>

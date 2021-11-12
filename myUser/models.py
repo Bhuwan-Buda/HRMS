@@ -73,7 +73,7 @@ class Education(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.fullname
+        return f"Education of  {self.user.fullname}"
 
     class Meta:
         db_table = 'education'
@@ -84,7 +84,7 @@ class Skill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.fullname
+        return f"Skill of  {self.user.fullname}"
 
     class Meta:
         db_table = 'skill'
@@ -95,7 +95,7 @@ class Experience(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.fullname
+        return f"Experience of  {self.user.fullname}"
 
     class Meta:
         db_table = 'experience'

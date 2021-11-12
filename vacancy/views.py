@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from vacancy.models import Vacancy, Enroll
+from vacancy.models import Vacancy, Apply
 from django.contrib import messages
-
 
 # Create your views here.
 
@@ -39,8 +38,11 @@ def deletevacancy(request, id):
 
 def viewvacancy(request, id):
     vac = get_object_or_404(Vacancy, id=id)
+    app = Apply.objects.filter(vacancy_id=id)
+    print(app)
     context = {
-        'vacancy': vac
+        'vacancy': vac,
+        'apply': app
     }
     return render(request, 'employee/view_vacancy.html', context)
 
@@ -93,4 +95,20 @@ def viewuservacancy(request, id):
     return render(request, 'user/view-vacancy.html', context)
 
 
+def apply(request, id):
+    isApply = Apply.objects.filter(vacancy_id=id, user_id=request.user.id).exists()
+    if isApply:
+        app = get_object_or_404(Apply)
+        app.vacancy_id = id
+        app.user_id = request.user.id
+        app.save()
+    else:
+        app = Apply(user_id=request.user.id, vacancy_id=id)
+        app.save()
+
+    vac = get_object_or_404(Vacancy, id=id)
+    context = {
+        'vacancy': vac
+    }
+    return render(request, 'user/view-vacancy.html', context)
 

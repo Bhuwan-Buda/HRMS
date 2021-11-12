@@ -19,15 +19,13 @@ class Vacancy(models.Model):
         db_table = 'Vacancy'
 
 
-class Enroll(models.Model):
-    isApplied = models.BooleanField(default=False)
-    isHired = models.BooleanField(default=False)
+class Apply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.fullname
+        return f'{self.user.fullname} applied in vacancy: {self.vacancy.title}'
 
     class Meta:
-        db_table = 'Enroll'
-
+        db_table = 'Apply'
+        unique_together = ['user', 'vacancy']
