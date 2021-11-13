@@ -97,12 +97,19 @@ def userVacancy(request):
 
 @login_required(login_url="login")
 def viewuservacancy(request, id):
+    context = {}
     vac = get_object_or_404(Vacancy, id=id)
-    aply = get_object_or_404(Apply, vacancy_id=id)
-    context = {
-        'vacancy': vac,
-        'apply': aply
-    }
+    isApply = Apply.objects.filter(vacancy_id=id).exists()
+    if isApply:
+        aply = get_object_or_404(Apply, vacancy_id=id)
+        context.update({
+            'vacancy': vac,
+            'apply': aply
+        })
+    else:
+        context.update({
+            'vacancy': vac
+        })
     return render(request, 'user/view-vacancy.html', context)
 
 
