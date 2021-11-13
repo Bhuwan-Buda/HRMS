@@ -4,6 +4,12 @@
 {% block 'title1' %} View Vacancy {% endblock %}
 {% block 'title2' %} View Vacancy {% endblock %}
 {% block 'style' %}
+    #fixed-message{
+        position: fixed;
+        top: 8%;
+        left: 77%;
+        z-index: 10000000;
+    }
     #image{
         width: 240px;
         height: 240px;
@@ -33,7 +39,11 @@
                 <li class="list-group-item"><strong>Posted by: </strong>{{vacancy.user}}</li>
               </ul>
               <br>
-            <a href="{% url 'apply' vacancy.id %}" class="btn btn-primary btn-md">Apply Now</a>
+              {% if apply.status is not True %}
+                <a href="{% url 'apply' vacancy.id %}" class="btn btn-primary btn-md">Apply Now</a>
+              {% else %}
+                <a href="#" class="btn btn-success btn-md disabled">You are hired!</a>
+              {% endif %}
           </div>
       </div>
     </div>
@@ -43,7 +53,7 @@
         <i class="fas fa-arrow-left"></i>
         Back to Vacancy</a>
 </div>
-{% endblock %}
-{% block 'script' %}
-
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
+</div>
 {% endblock %}

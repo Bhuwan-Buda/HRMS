@@ -24,7 +24,15 @@
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-
+<script>
+    {% block 'script' %}
+        $(document).ready(function () {
+          setTimeout(function () {
+            $(".alert").hide();
+          }, 3000);
+        });
+    {% endblock %}
+    </script>
 </body>
 </html>
 

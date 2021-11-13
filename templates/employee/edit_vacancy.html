@@ -3,7 +3,14 @@
 {% block 'title' %} Employee - Edit Vacancy {% endblock %}
 {% block 'emptitle1' %} Edit Vacancy {% endblock %}
 {% block 'emptitle2' %} Edit Vacancy {% endblock %}
-
+{% block 'style' %}
+  #fixed-message{
+        position: fixed;
+        top: 8%;
+        left: 77%;
+        z-index: 10000000;
+    }
+{% endblock %}
 {% block 'empcontent' %}
 <div class="card card-primary">
   <div class="card-header">
@@ -47,5 +54,8 @@
     <a href="{% url 'vacancy' %}" style="text-decoration: none; font-size: 1.2rem;">
         <i class="fas fa-arrow-left"></i>
         Back to Vacancy</a>
+</div>
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
 </div>
 {% endblock %}

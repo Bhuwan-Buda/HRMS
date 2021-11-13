@@ -9,5 +9,6 @@ urlpatterns = [
     path('edit-vacancy/<int:id>', views.editvacancy, name='edit-vacancy'),
     path('user-vacancy/', views.userVacancy, name='user-vacancy'),
     path('view-user-vacancy/<int:id>', views.viewuservacancy, name='view-user-vacancy'),
-    path('apply/<int:id>', views.apply, name='apply')
+    path('apply/<int:id>', views.apply, name='apply'),
+    path('hire/<int:id>', views.hire, name='hire')
 ]

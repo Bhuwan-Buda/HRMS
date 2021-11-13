@@ -2,6 +2,12 @@
 {% load static %}
 {% block 'title' %} Employee - View Vacancy {% endblock %}
 {% block 'style' %}
+    #fixed-message{
+        position: fixed;
+        top: 8%;
+        left: 77%;
+        z-index: 10000000;
+    }
     #image{
         width: 240px;
         height: 240px;
@@ -19,6 +25,9 @@
 {% block 'emptitle2' %} View Vacancy {% endblock %}
 
 {% block 'empcontent' %}
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
+</div>
 <div class="container">
     <div class="row">
       <div class="card flex-row-reverse">
@@ -53,16 +62,26 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            {% for a in apply %}
-                          <td>{{forloop.counter}}</td>
-                          <td>{{a.user.fullname}}</td>
-                          <td>{{a.user.address}}</td>
-                          <td>{{a.user.email}}</td>
-                          <td>{{a.user.contactNo}}</td>
-                          <th><a href="{% url 'viewuser' a.user.id %}" class="btn btn-primary btn-sm" style="color:white"><i class="fas fa-eye"></i> View</a></th>
-                        </tr>
-                      {% endfor %}
+                      {% if apply %}
+                          {% for a in apply %}
+                            <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{a.user.fullname}}</td>
+                              <td>{{a.user.address}}</td>
+                              <td>{{a.user.email}}</td>
+                              <td>{{a.user.contactNo}}</td>
+                              <th>
+                                  {% if a.status is not True %}
+                                    <a href="{% url 'hire' a.id %}" class="btn btn-primary btn-sm" style="color:white"> Hire </a>
+                                  {% else %}
+                                    <a href="#" class="btn btn-success btn-sm disabled" style="color:white"> Hired </a>
+                                  {% endif %}
+                              </th>
+                            </tr>
+                          {% endfor %}
+                      {% else %}
+                      <tr><th colspan="6">No one has applied for this vacancy yet.</th></tr>
+                      {% endif %}
                       </tbody>
                     </table>
                 </div>

@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from vacancy.models import Vacancy, Apply
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@login_required(login_url="login")
 def vacancy(request):
     vac = Vacancy.objects.filter(user=request.user)[::-1]
     context = {
@@ -13,6 +14,7 @@ def vacancy(request):
     return render(request, 'employee/vacancy.html', context)
 
 
+@login_required(login_url="login")
 def createvacancy(request):
     if request.method == 'POST':
         title = request.POST['title']
@@ -24,22 +26,24 @@ def createvacancy(request):
         uid = request.POST['vac']
         v = Vacancy(title=title, description=des, qualification=qualify, experience=exp, salary=salary, final_date=date, user_id=uid)
         v.save()
+        messages.add_message(request, messages.SUCCESS, "Vacancy successfully created!")
         return redirect('vacancy')
 
     return render(request, 'employee/create_vacancy.html')
 
 
+@login_required(login_url="login")
 def deletevacancy(request, id):
     vac = Vacancy.objects.get(id=id)
     vac.delete()
-    messages.add_message(request, messages.ERROR, f"{vac.title} is deleted")
+    messages.add_message(request, messages.ERROR, f"{vac.title} is deleted successfully!")
     return redirect('vacancy')
 
 
+@login_required(login_url="login")
 def viewvacancy(request, id):
     vac = get_object_or_404(Vacancy, id=id)
     app = Apply.objects.filter(vacancy_id=id)
-    print(app)
     context = {
         'vacancy': vac,
         'apply': app
@@ -47,6 +51,7 @@ def viewvacancy(request, id):
     return render(request, 'employee/view_vacancy.html', context)
 
 
+@login_required(login_url="login")
 def editvacancy(request, id):
     vac = get_object_or_404(Vacancy, id=id)
     context = {
@@ -71,14 +76,17 @@ def editvacancy(request, id):
             v.salary = salary
             v.final_date = date
             v.save()
+            messages.add_message(request, messages.SUCCESS, "Vacancy is successfully edited!")
         else:
             v = Vacancy(title=title, description=des, qualification=qualify, experience=exp, salary=salary, final_date=date, user_id=uid)
             v.save()
+            messages.add_message(request, messages.SUCCESS, "Vacancy is successfully created!")
         return redirect('vacancy')
 
     return render(request, 'employee/edit_vacancy.html', context)
 
 
+@login_required(login_url="login")
 def userVacancy(request):
     vac = Vacancy.objects.all()[::-1]
     context = {
@@ -87,28 +95,42 @@ def userVacancy(request):
     return render(request, 'user/vacancy.html', context)
 
 
+@login_required(login_url="login")
 def viewuservacancy(request, id):
     vac = get_object_or_404(Vacancy, id=id)
+    aply = get_object_or_404(Apply, vacancy_id=id)
     context = {
-        'vacancy': vac
+        'vacancy': vac,
+        'apply': aply
     }
     return render(request, 'user/view-vacancy.html', context)
 
 
+@login_required(login_url="login")
 def apply(request, id):
-    isApply = Apply.objects.filter(vacancy_id=id, user_id=request.user.id).exists()
-    if isApply:
-        app = get_object_or_404(Apply)
-        app.vacancy_id = id
-        app.user_id = request.user.id
-        app.save()
-    else:
-        app = Apply(user_id=request.user.id, vacancy_id=id)
-        app.save()
-
     vac = get_object_or_404(Vacancy, id=id)
     context = {
         'vacancy': vac
     }
+
+    aply = Apply(vacancy_id=id, user_id=request.user.id)
+    try:
+        aply.save()
+        messages.add_message(request, messages.SUCCESS, "You have successfully applied for this vacancy!")
+    except:
+        messages.add_message(request, messages.ERROR, "You have already applied for this vacancy!")
+
     return render(request, 'user/view-vacancy.html', context)
 
+
+@login_required(login_url="login")
+def hire(request, id):
+    aply = get_object_or_404(Apply, id=id)
+    try:
+        aply.status = True
+        aply.save()
+        messages.add_message(request, messages.SUCCESS, "Successfully hired!")
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "Already hired")
+
+    return redirect('vacancy')

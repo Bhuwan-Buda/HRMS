@@ -7,7 +7,6 @@ from vacancy.models import Vacancy
 
 # Create your views here.
 
-
 def homepage(request):
     return redirect('login')
 
@@ -129,7 +128,7 @@ def employeeDashboard(request):
         return render(request, 'employee/dashboard.html', context)
     return render(request, 'employee/dashboard.html', context)
 
-
+@login_required(login_url="login")
 def profile(request):
     context = {}
     try:
@@ -143,7 +142,7 @@ def profile(request):
         return render(request, 'user/education.html')
     return render(request, 'user/profile.html', context)
 
-
+@login_required(login_url="login")
 def education(request):
     if request.method == 'POST':
         inst = request.POST['institution']
@@ -185,7 +184,7 @@ def education(request):
     }
     return render(request, 'user/education.html', context)
 
-
+@login_required(login_url="login")
 def skill(request):
     if request.method == 'POST':
         skl = request.POST['textarea']
@@ -211,7 +210,7 @@ def skill(request):
 
     return render(request, 'user/skill.html')
 
-
+@login_required(login_url="login")
 def experience(request):
     if request.method == 'POST':
         exp = request.POST['exptextarea']
@@ -228,7 +227,7 @@ def experience(request):
 
     return render(request, 'user/experience.html')
 
-
+@login_required(login_url="login")
 def userlist(request):
     context = {}
     try:
@@ -240,7 +239,7 @@ def userlist(request):
         return render(request, 'employee/userlist.html')
     return render(request, 'employee/userlist.html', context)
 
-
+@login_required(login_url="login")
 def viewuser(request, id):
     user = get_object_or_404(User, id=id, isUser=True, is_admin=False)
     e = get_object_or_404(Education, user=id)

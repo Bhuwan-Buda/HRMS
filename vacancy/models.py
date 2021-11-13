@@ -22,6 +22,7 @@ class Vacancy(models.Model):
 class Apply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.fullname} applied in vacancy: {self.vacancy.title}'

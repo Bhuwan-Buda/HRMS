@@ -1,7 +1,7 @@
 {% if messages %}
   {% for m in messages %}
     {% if m.tags == 'success' %}
-      <div class="alert alert-success"><i class="fas fa-mark"></i> {{m}}</div>
+      <div class="alert alert-success"><i class="fas fa-check"></i> {{m}}</div>
     {% else %}
       <div class="alert alert-danger"><i class="fas fa-times"></i> {{m}}</div>
     {% endif %}
