@@ -6,8 +6,17 @@
     transition: all ease 1s;
     color: #48b080;
 }
+#fixed-message {
+      position: fixed;
+      top: 8%;
+      left: 77%;
+      z-index: 10000000;
+  }
 {% endblock %}
 {% block 'body' %}
+<div id="fixed-message">
+  {% include 'component/messages.html' %}
+</div>
 <div class="wrapper">
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">

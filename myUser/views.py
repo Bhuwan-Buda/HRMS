@@ -7,6 +7,7 @@ from vacancy.models import Vacancy
 
 # Create your views here.
 
+
 def homepage(request):
     return redirect('login')
 
@@ -71,7 +72,9 @@ def signin(request):
         if user is not None:
             login(request, user)
             if user.isUser:
+                messages.add_message(request, messages.SUCCESS, "Successfully logged in as user!!")
                 return redirect('userDashboard')
+            messages.add_message(request, messages.SUCCESS, "Successfully logged in as employee!!")
             return redirect('employeeDashboard')
         else:
             messages.add_message(request, messages.ERROR, "Email and password does not match !!!")
@@ -81,12 +84,14 @@ def signin(request):
 
 def signout(request):
     logout(request)
+    messages.add_message(request, messages.SUCCESS, "Successfully logged out!")
     return redirect('login')
 
 
 def delete(request):
     user = User.objects.get(id=request.user.id)
     user.delete()
+    messages.add_message(request, messages.SUCCESS, "Your account has been deleted successfully!")
     return redirect('login')
 
 
