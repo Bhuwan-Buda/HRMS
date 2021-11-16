@@ -1,0 +1,38 @@
+{% extends 'employee/dashboard.html' %}
+{% load static %}
+{% block 'title' %} Employee - Profile {% endblock %}
+{% block 'emptitle1' %} Profile {% endblock %}
+{% block 'emptitle2' %} Profile {% endblock %}
+{% block 'empcontent' %}
+<div class="card card-primary">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            {% if edu.img %}
+                <img class="profile-user-img img-fluid img-circle"
+                src="{{MEDIA_URL}}{{edu.img.url}}"
+                alt="User profile picture">
+            {% else %}
+                <img class="profile-user-img img-fluid img-circle"
+                src="{% static 'img/userprofile.jpg' %}"
+                alt="User profile picture">
+            {% endif %}
+        </div>
+        <h3 class="profile-username text-center">{{request.user.fullname}}</h3>
+    </div>
+</div>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">About Me</h3>
+    </div>
+    <div class="card-body">
+        <strong><i class="fas fa-home"></i> Address</strong>
+        <p class="text-muted">{{request.user.address}}</p>
+        <hr/>
+        <strong><i class="fas fa-envelope"></i> Email</strong>
+        <p class="text-muted">{{request.user.email}}</p>
+        <hr>
+        <strong><i class="fas fa-phone"></i> Contact</strong>
+         <p class="text-muted">{{request.user.contactNo}}</p>
+    </div>
+</div>
+{% endblock %}

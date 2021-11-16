@@ -232,6 +232,12 @@ def experience(request):
 
     return render(request, 'user/experience.html')
 
+
+@login_required(login_url="login")
+def empprofile(request):
+    return render(request, 'employee/profile.html')
+
+
 @login_required(login_url="login")
 def userlist(request):
     context = {}

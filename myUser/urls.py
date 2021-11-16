@@ -8,6 +8,7 @@ urlpatterns = [
     path('user/education/', views.education, name='education'),
     path('user/skill/', views.skill, name='skill'),
     path('user/experience/', views.experience, name='experience'),
+    path('employee/profile/', views.empprofile, name='empprofile'),
     path('employee/userlist/', views.userlist, name='userlist'),
     path('employee/viewuser/<int:id>', views.viewuser, name='viewuser'),
     path('vacancy/', include('vacancy.urls'))
